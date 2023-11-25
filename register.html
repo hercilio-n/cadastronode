@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuário</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Aqui você pode adicionar o link para seu arquivo de estilos CSS -->
+</head>
+<body>
+  <h1>Cadastro de Usuário</h1>
+  <form id="registerForm">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required><br><br>
+
+    <label for="perfil">Perfil:</label>
+    <input type="text" id="perfil" name="perfil" required><br><br>
+
+    <input type="submit" value="Cadastrar">
+  </form>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = {
+        nome: document.getElementById('nome').value,
+        email: document.getElementById('email').value,
+        senha: document.getElementById('senha').value,
+        perfil: document.getElementById('perfil').value
+      };
+
+      fetch('/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Usuário cadastrado com sucesso!');
+          window.location.href = '/login.html'; // Redirecionar para a página de login após o cadastro
+        } else {
+          throw new Error('Erro ao cadastrar usuário.');
+        }
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+    });
+  </script>
+</body>
+</html>
