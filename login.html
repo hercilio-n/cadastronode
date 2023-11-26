@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Aqui você pode adicionar o link para seu arquivo de estilos CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Login</h1>
@@ -26,7 +26,7 @@
         senha: document.getElementById('senha').value
       };
 
-      fetch('/usuarios/login', {
+      fetch('http://localhost:3010/usuarios/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -41,9 +41,9 @@
         }
       })
       .then(token => {
-        localStorage.setItem('token', token); // Armazenar o token no localStorage
+        localStorage.setItem('token', token);
         alert('Login bem-sucedido!');
-        window.location.href = '/dashboard.html'; // Redirecionar para a página de dashboard após o login
+        window.location.href = '/dashboard.html';
       })
       .catch(error => {
         alert(error.message);

@@ -2,8 +2,10 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const app = express()
-const port = 3000
+const port = 3010
+const cors = require('cors')
 
+app.use(cors());
 app.use(express.json())
 /*Nossa base de dados */
 const usuarios = []
